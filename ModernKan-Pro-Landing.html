@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModernKan Pro - Modern Project Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --secondary: #00d9ff;
+            --accent: #ffbe0b;
+            --dark-bg: #0a0a15;
+            --dark-surface: #1a1a2e;
+            --dark-surface-light: #16213e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-surface) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 21, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid #ff006e;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 950;
+            background: linear-gradient(135deg, #ff006e 0%, #00d9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #ff006e;
+            text-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding-top: 7rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: 5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 0, 110, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            filter: blur(40px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: 5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+            filter: blur(40px);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(40px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 12vw, 6rem);
+            font-weight: 950;
+            margin-bottom: 1.5rem;
+            line-height: 1.05;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            text-shadow: 0 20px 40px rgba(255, 0, 110, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ff006e 0%, #00d9ff 50%, #ffbe0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1.3rem 3.5rem;
+            font-size: 1.3rem;
+            font-weight: 900;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff006e 0%, #667eea 50%, #00d9ff 100%);
+            color: white;
+            box-shadow: 0 20px 50px rgba(255, 0, 110, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-6px) scale(1.08);
+            box-shadow: 0 30px 70px rgba(255, 0, 110, 0.7);
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00d9ff;
+            border: 3px solid #00d9ff;
+            font-weight: 900;
+        }
+
+        .btn-secondary:hover {
+            background: #00d9ff;
+            color: var(--dark-bg);
+            transform: scale(1.08);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            padding: 7rem 2rem;
+            background: var(--dark-bg);
+        }
+
+        .about h2 {
+            font-size: 4.5rem;
+            font-weight: 950;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff006e 0%, #00d9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content > p {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--dark-surface);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 2px solid #ff006e;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(255, 0, 110, 0.3);
+            border-color: #00d9ff;
+        }
+
+        .about-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            color: #00d9ff;
+            text-transform: uppercase;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 7rem 2rem;
+            background: var(--dark-surface);
+        }
+
+        .features h2 {
+            font-size: 4.5rem;
+            font-weight: 950;
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff006e 0%, #ffbe0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--dark-surface-light);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 2px solid #00d9ff;
+            transition: all 0.3s;
+            animation: fadeIn 0.6s ease-out backwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            border-color: #ff006e;
+            box-shadow: 0 30px 60px rgba(255, 0, 110, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #ffbe0b;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        /* PRICING SECTION */
+        .pricing {
+            padding: 7rem 2rem;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .pricing h2 {
+            font-size: 4.5rem;
+            font-weight: 950;
+            margin-bottom: 3rem;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ff006e 0%, #00d9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, var(--dark-surface-light) 0%, var(--dark-surface) 100%);
+            border: 4px solid #ff006e;
+            padding: 4rem;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 2rem auto;
+            box-shadow: 0 40px 100px rgba(255, 0, 110, 0.4);
+            animation: slideUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .pricing-card h3 {
+            font-size: 2.5rem;
+            font-weight: 950;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            color: #00d9ff;
+        }
+
+        .price {
+            font-size: 5rem;
+            font-weight: 950;
+            background: linear-gradient(135deg, #ff006e 0%, #00d9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1.5rem 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .price-period {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card > p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin: 3rem 0;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li {
+            list-style: none;
+            padding: 1rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ff006e;
+            font-weight: 950;
+            font-size: 1.5rem;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #ff006e 0%, #667eea 50%, #00d9ff 100%);
+            text-align: center;
+            border-radius: 20px;
+            max-width: 1000px;
+            margin: 0 auto 6rem;
+            box-shadow: 0 40px 100px rgba(255, 0, 110, 0.4);
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 950;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: white;
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-section .btn {
+            background: white;
+            color: #ff006e;
+            font-weight: 950;
+        }
+
+        .cta-section .btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 2px solid #ff006e;
+            margin-top: 2rem;
+            background: var(--dark-surface);
+        }
+
+        footer p {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding-top: 5rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .features h2, .about h2, .pricing h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .pricing-card {
+                padding: 2rem;
+            }
+
+            .price {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">ModernKan Pro</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="https://buy.stripe.com/test_6oU4gz6Km4LBeXs7Gla3u01" class="btn btn-primary" style="padding: 0.8rem 1.8rem; font-size: 0.95rem;">Get Started</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Projects, <span class="gradient-text">Perfected</span></h1>
+            <p><strong>ModernKan Pro</strong> is a beautifully designed project management platform that helps teams organize, track, and complete tasks effortlessly. With stunning Kanban boards, AI-powered suggestions, and a sleek dark mode interface, we make project management feel like a breeze instead of a burden.</p>
+            <p style="font-size: 1.2rem; margin-top: 1.5rem;"><strong>What You Get:</strong> Real-time task management, intelligent workflow automation, team collaboration tools, and beautiful dashboards that actually make work enjoyable.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://buy.stripe.com/test_6oU4gz6Km4LBeXs7Gla3u01" class="btn btn-primary">Start Free Trial</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <h2>What is ModernKan Pro?</h2>
+        
+        <div class="about-content">
+            <p>ModernKan Pro is a next-generation project management tool built from the ground up for modern teams. It's a complete redesign of traditional Kanban management with a beautiful interface, powerful AI assistance, and everything your team needs to stay organized and productive.</p>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>📋 Task Management</h3>
+                    <p>Create, organize, and track tasks across multiple projects with beautiful Kanban boards. Drag and drop to update status instantly.</p>
+                </div>
+
+                <div class="about-card">
+                    <h3>🤝 Team Collaboration</h3>
+                    <p>Work together seamlessly. Assign tasks, add comments, share files, and keep everyone on the same page in real-time.</p>
+                </div>
+
+                <div class="about-card">
+                    <h3>📈 Analytics & Insights</h3>
+                    <p>Track progress with beautiful charts and reports. See what's working, identify bottlenecks, and make data-driven decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <h2>Powerful Features</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Beautiful Kanban Boards</h3>
+                <p>Visualize your workflow with stunning, interactive Kanban boards. Drag and drop tasks between columns to update status instantly. Perfect for agile teams managing sprints and deadlines.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌙</div>
+                <h3>Dark Mode & Light Mode</h3>
+                <p>Easy on the eyes. Switch between beautiful themes that match your preference, reduce eye strain, and work comfortably at any time of day or night.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI-Powered Suggestions</h3>
+                <p>Get intelligent task recommendations, priority suggestions, and smart workflow automation. Let AI help you work smarter and complete projects faster.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast Performance</h3>
+                <p>Built for speed with optimized performance. No lag, no delays. Your team stays productive and responsive, even with thousands of tasks and projects.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Enterprise-Grade Security</h3>
+                <p>Your data is protected with industry-standard encryption and advanced security protocols. Enterprise SSO, activity logs, and complete privacy control.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing" id="pricing">
+        <h2>Simple, Transparent Pricing</h2>
+        
+        <div class="pricing-card">
+            <h3>ModernKan Pro - Complete Plan</h3>
+            <div class="price">$500<span class="price-period">/month</span></div>
+            <p>Everything you need to manage projects beautifully and professionally</p>
+            <p style="font-size: 0.95rem; color: #00d9ff;"><strong>This is a SaaS subscription for a modern, AI-powered project management platform.</strong></p>
+            
+            <ul class="pricing-features">
+                <li>Unlimited projects & tasks</li>
+                <li>AI-powered task suggestions & automation</li>
+                <li>Dark mode & light mode themes</li>
+                <li>Real-time team collaboration</li>
+                <li>Advanced analytics & reporting</li>
+                <li>Priority support (24/7)</li>
+                <li>Custom team workflows</li>
+                <li>Integration capabilities</li>
+                <li>Advanced security & SSO</li>
+                <li>Unlimited file attachments</li>
+            </ul>
+
+            <a href="https://buy.stripe.com/test_6oU4gz6Km4LBeXs7Gla3u01" class="btn btn-primary" style="width: 100%; text-align: center;">Subscribe to ModernKan Pro</a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta">
+        <h2>Stop Struggling with Project Management</h2>
+        <p>ModernKan Pro gives you beautiful, AI-powered project management that your team will actually want to use. Get organized, stay productive, and ship projects faster.</p>
+        <a href="https://buy.stripe.com/test_6oU4gz6Km4LBeXs7Gla3u01" class="btn btn-primary">Start Your $500/Month Subscription</a>
+        <p style="margin-top: 2rem; font-size: 1.1rem;">Unlimited projects, unlimited tasks, unlimited team members. One low monthly price.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 ModernKan Pro. A modern, beautiful project management platform for teams. | $500/month for unlimited projects, tasks, and team collaboration.</p>
+    </footer>
+</body>
+</html>
